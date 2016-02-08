@@ -46,8 +46,10 @@
 <div class="gif-detail container">
     <div class="frame row">
         <div class="col s12">
-            <img th:src="@{/gifs/compiler-bot.gif}" alt="gif"/>
-            <a href="#" class="mark favorite"></a>
+            <!--This is how we access the name field of the Gif object that we passed in with our model map -->
+            <img th:src="@{'/gifs/'+${gif.name}+'.gif'}" alt="gif"/>
+            <!--Change css class based upon the value of ${gif.favorite} -->
+            <a href="#" th:class="(${gif.favorite} ? 'un' : '' )+ 'mark favorite'"></a>
         </div>
     </div>
     <div class="row">
@@ -57,15 +59,15 @@
                     <img class="circle" src="http://api.adorable.io/avatars/205/avatar" alt="avatar"/>
                 </div>
                 <div class="col s9">
-                    <h4>Craig Dennis</h4>
-                    <p>Uploaded on Oct 30 2015</p>
+                    <h4 th:text="${gif.username}">Craig Dennis</h4>
+                    <p th:text="'Uploaded on ' + ${gif.dateUploaded}">Uploaded on Oct 30 2015</p>
                 </div>
             </div>
         </div>
         <div class="col s12 l6">
             <div class="share">
                 <a class="btn right" href="#">Copy</a>
-                <span>URL</span>
+                <span th:text="'https://gif.fy/' + ${gif.name}"></span>
             </div>
         </div>
     </div>
